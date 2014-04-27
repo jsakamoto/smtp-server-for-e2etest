@@ -47,6 +47,8 @@ namespace Toolbelt.Net.Smtp
 
         private IDisposable _httpHost;
 
+        private SmtpServerCore _smtpHost;
+
         public void Start()
         {
             lock (this)
@@ -56,7 +58,22 @@ namespace Toolbelt.Net.Smtp
                     var baseAddress = string.Format("http://{0}:{1}/", this.Config.ApiEndPoint.Address, this.Config.ApiEndPoint.Port);
                     _httpHost = WebApp.Start<Startup>(url: baseAddress);
                 }
+                if (_smtpHost == null)
+                {
+                    _smtpHost = new SmtpServerCore(
+                        this.Config.SmtpEndPoints.Select(ep => ep.ToIPEndPoint())
+                        );
+                    _smtpHost.ReceiveMessage += OnReceiveMessage;
+                    _smtpHost.Start();
+                }
             }
+        }
+
+        protected virtual void OnReceiveMessage(object sender, ReceiveMessageEventArgs e)
+        {
+            var msg = e.Message;
+            var saveToPath = Path.Combine(this.MailFolderPath, msg.Id.ToString("N") + ".eml");
+            msg.SaveAs(saveToPath);
         }
 
         public void Stop()
@@ -67,6 +84,12 @@ namespace Toolbelt.Net.Smtp
                 {
                     _httpHost.Dispose();
                     _httpHost = null;
+                }
+                if (_smtpHost != null)
+                {
+                    _smtpHost.Stop();
+                    _smtpHost.Dispose();
+                    _smtpHost = null;
                 }
             }
         }
