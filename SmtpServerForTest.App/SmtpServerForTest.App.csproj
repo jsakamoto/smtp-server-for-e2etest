@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7453257B-ACBB-4F1B-88EA-24E40F0DA8F4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Toolbelt.Net.Smtp</RootNamespace>
+    <AssemblyName>SmtpServerForTest.App</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.FileSystems">
+      <HintPath>..\packages\Microsoft.Owin.FileSystems.2.1.0\lib\net40\Microsoft.Owin.FileSystems.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener">
+      <HintPath>..\packages\Microsoft.Owin.Host.HttpListener.2.1.0\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting">
+      <HintPath>..\packages\Microsoft.Owin.Hosting.2.1.0\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.StaticFiles">
+      <HintPath>..\packages\Microsoft.Owin.StaticFiles.2.1.0\lib\net45\Microsoft.Owin.StaticFiles.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.1.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.1.2\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Toolbelt.Net.Smtp.SmtpMessage, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpMessage.1.0.0.3-beta1\lib\net40\Toolbelt.Net.Smtp.SmtpMessage.dll</HintPath>
+    </Reference>
+    <Reference Include="Toolbelt.Net.Smtp.SmtpServerCore">
+      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpServerCore.1.0.0.0-beta1\lib\net40\Toolbelt.Net.Smtp.SmtpServerCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Code\ResourceFileSystem.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Extension.cs" />
+    <Compile Include="MailsController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ValueController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <EmbeddedResource Include="Scripts\angular-animate.min.js.map" />
+    <EmbeddedResource Include="Scripts\angular-cookies.min.js.map" />
+    <EmbeddedResource Include="Scripts\angular-loader.min.js.map" />
+    <EmbeddedResource Include="Scripts\angular-resource.min.js.map" />
+    <EmbeddedResource Include="Scripts\angular-route.min.js.map" />
+    <EmbeddedResource Include="Scripts\angular-sanitize.min.js.map" />
+    <EmbeddedResource Include="Scripts\angular-touch.min.js.map" />
+    <EmbeddedResource Include="Scripts\angular.min.js.map" />
+    <EmbeddedResource Include="Scripts\errors.json" />
+    <EmbeddedResource Include="Scripts\version.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="app.js" />
+    <EmbeddedResource Include="index.html" />
+    <EmbeddedResource Include="Scripts\angular-animate.js" />
+    <EmbeddedResource Include="Scripts\angular-animate.min.js" />
+    <EmbeddedResource Include="Scripts\angular-cookies.js" />
+    <EmbeddedResource Include="Scripts\angular-cookies.min.js" />
+    <EmbeddedResource Include="Scripts\angular-csp.css" />
+    <EmbeddedResource Include="Scripts\angular-loader.js" />
+    <EmbeddedResource Include="Scripts\angular-loader.min.js" />
+    <EmbeddedResource Include="Scripts\angular-mocks.js" />
+    <EmbeddedResource Include="Scripts\angular-resource.js" />
+    <EmbeddedResource Include="Scripts\angular-resource.min.js" />
+    <EmbeddedResource Include="Scripts\angular-route.js" />
+    <EmbeddedResource Include="Scripts\angular-route.min.js" />
+    <EmbeddedResource Include="Scripts\angular-sanitize.js" />
+    <EmbeddedResource Include="Scripts\angular-sanitize.min.js" />
+    <EmbeddedResource Include="Scripts\angular-scenario.js" />
+    <EmbeddedResource Include="Scripts\angular-touch.js" />
+    <EmbeddedResource Include="Scripts\angular-touch.min.js" />
+    <EmbeddedResource Include="Scripts\angular.js" />
+    <EmbeddedResource Include="Scripts\angular.min.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_af-na.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_af-za.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_af.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_am-et.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_am.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-001.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-ae.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-bh.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-dz.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-eg.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-iq.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-jo.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-kw.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-lb.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-ly.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-ma.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-om.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-qa.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-sa.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-sd.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-sy.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-tn.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar-ye.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ar.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_bg-bg.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_bg.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_bn-bd.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_bn-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_bn.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ca-ad.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ca-es.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ca.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_cs-cz.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_cs.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_da-dk.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_da.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_de-at.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_de-be.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_de-ch.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_de-de.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_de-li.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_de-lu.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_de.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_el-cy.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_el-gr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_el.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-as.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-au.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-bb.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-be.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-bm.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-bw.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-bz.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-ca.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-dsrt-us.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-dsrt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-fm.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-gb.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-gu.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-gy.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-hk.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-ie.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-iso.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-jm.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-mh.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-mp.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-mt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-mu.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-na.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-nz.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-ph.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-pk.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-pr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-pw.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-sg.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-tc.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-tt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-um.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-us.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-vg.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-vi.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-za.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en-zw.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_en.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-419.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-ar.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-bo.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-cl.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-co.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-cr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-do.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-ea.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-ec.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-es.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-gq.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-gt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-hn.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-ic.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-mx.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-ni.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-pa.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-pe.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-pr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-py.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-sv.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-us.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-uy.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es-ve.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_es.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_et-ee.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_et.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_eu-es.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_eu.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fa-af.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fa-ir.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fa.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fi-fi.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fi.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fil-ph.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fil.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-be.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-bf.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-bi.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-bj.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-bl.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-ca.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-cd.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-cf.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-cg.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-ch.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-ci.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-cm.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-dj.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-fr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-ga.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-gf.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-gn.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-gp.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-gq.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-km.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-lu.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-mc.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-mf.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-mg.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-ml.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-mq.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-ne.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-re.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr-yt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_fr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_gl-es.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_gl.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_gsw-ch.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_gsw.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_gu-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_gu.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_he-il.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_he.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_hi-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_hi.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_hr-hr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_hr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_hu-hu.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_hu.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_id-id.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_id.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_is-is.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_is.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_it-it.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_it-sm.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_it.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_iw.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ja-jp.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ja.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_kn-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_kn.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ko-kr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ko.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ln-cd.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ln.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_lt-lt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_lt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_lv-lv.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_lv.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ml-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ml.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_mr-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_mr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ms-my.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ms.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_mt-mt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_mt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_nl-cw.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_nl-nl.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_nl-sx.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_nl.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_no.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_or-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_or.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_pl-pl.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_pl.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_pt-br.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_pt-pt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_pt.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ro-ro.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ro.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ru-ru.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ru.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sk-sk.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sk.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sl-si.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sl.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sq-al.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sq.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sr-cyrl-rs.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sr-latn-rs.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sv-se.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sv.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sw-tz.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_sw.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ta-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ta.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_te-in.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_te.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_th-th.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_th.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_tl.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_tr-tr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_tr.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_uk-ua.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_uk.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ur-pk.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_ur.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_vi-vn.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_vi.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_zh-cn.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_zh-hans-cn.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_zh-hk.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_zh-tw.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_zh.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_zu-za.js" />
+    <EmbeddedResource Include="Scripts\i18n\angular-locale_zu.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="views\mails.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
