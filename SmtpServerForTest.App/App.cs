@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 
 namespace Toolbelt.Net.Smtp
 {
+    using SignalR = Microsoft.AspNet.SignalR;
+
     public class App : IDisposable
     {
         public AppConfig Config { get; set; }
@@ -74,6 +76,10 @@ namespace Toolbelt.Net.Smtp
             var msg = e.Message;
             var saveToPath = Path.Combine(this.MailFolderPath, msg.Id.ToString("N") + ".eml");
             msg.SaveAs(saveToPath);
+
+            // notify via SignalR
+            var hubContext = SignalR.GlobalHost.ConnectionManager.GetHubContext<SmtpServerHub>();
+            SmtpServerHub.NotifyReceiveMessage(msg, hubContext.Clients);
         }
 
         public void Stop()

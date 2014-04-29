@@ -1,9 +1,10 @@
 ﻿<h2>mail list</h2>
-<div>
+<div class="mails-list">
     <div ng-repeat="mail in mails">
-        <div>{{mail.Id}}          </div>
-        <div>{{mail.Subject}}     </div>
+        <div>{{mail.Id}}</div>
+        <div>{{mail.Subject}}</div>
         <div>{{mail.From.Address}}</div>
+        <div>{{mail.To}}</div>
         <div>{{mail.Date}}</div>
     </div>
 </div>

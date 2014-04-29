@@ -33,8 +33,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.0.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors">
+      <HintPath>..\packages\Microsoft.Owin.Cors.2.1.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Diagnostics">
+      <HintPath>..\packages\Microsoft.Owin.Diagnostics.2.0.1\lib\net40\Microsoft.Owin.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.FileSystems">
       <HintPath>..\packages\Microsoft.Owin.FileSystems.2.1.0\lib\net40\Microsoft.Owin.FileSystems.dll</HintPath>
@@ -44,6 +53,9 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Hosting">
       <HintPath>..\packages\Microsoft.Owin.Hosting.2.1.0\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.StaticFiles">
       <HintPath>..\packages\Microsoft.Owin.StaticFiles.2.1.0\lib\net45\Microsoft.Owin.StaticFiles.dll</HintPath>
@@ -61,6 +73,9 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -88,6 +103,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="MailsController.cs" />
+    <Compile Include="SmtpServerHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ValueController.cs" />
@@ -105,6 +121,7 @@
     <EmbeddedResource Include="Scripts\angular.min.js.map" />
     <EmbeddedResource Include="Scripts\errors.json" />
     <EmbeddedResource Include="Scripts\version.json" />
+    <EmbeddedResource Include="Scripts\jquery-1.11.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="app.js" />
@@ -375,6 +392,13 @@
     <EmbeddedResource Include="Scripts\i18n\angular-locale_zu.js" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\jquery.signalR-2.0.3.js" />
+    <EmbeddedResource Include="Scripts\jquery.signalR-2.0.3.min.js" />
+    <EmbeddedResource Include="Scripts\jquery-1.11.0.intellisense.js" />
+    <EmbeddedResource Include="Scripts\jquery-1.11.0.js" />
+    <EmbeddedResource Include="Scripts\jquery-1.11.0.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="styles\site.css" />
     <Content Include="views\mails.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

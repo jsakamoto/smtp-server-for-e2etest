@@ -1,0 +1,14 @@
+﻿* {
+}
+
+.mails-list .ng-enter {
+    opacity: 0;
+    -moz-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    -webkit-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+
+    .mails-list .ng-enter.ng-enter-active {
+        opacity: 1;
+    }
