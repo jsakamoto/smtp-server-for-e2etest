@@ -1,14 +1,48 @@
 ﻿* {
 }
 
+.command .delete {
+    color:darkgray;
+}
+.command .delete.enabled {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.mails-list .mail {
+    border-bottom: solid 1px #ccc;
+}
+
+    .mails-list .mail .summary,
+    .mails-list .mail .selector {
+        display: inline-block;
+    }
+
+    .mails-list .mail.selected {
+        background-color: #ccc;
+    }
+
 .mails-list .ng-enter {
     opacity: 0;
-    -moz-transition: all linear 0.5s;
-    -o-transition: all linear 0.5s;
-    -webkit-transition: all linear 0.5s;
-    transition: all linear 0.5s;
+    -moz-transition: opacity linear 0.5s;
+    -o-transition: opacity linear 0.5s;
+    -webkit-transition: opacity linear 0.5s;
+    transition: opacity linear 0.5s;
 }
 
     .mails-list .ng-enter.ng-enter-active {
         opacity: 1;
+    }
+
+.mails-list .ng-leave {
+    opacity: 1;
+    -moz-transition: opacity linear 0.5s;
+    -o-transition: opacity linear 0.5s;
+    -webkit-transition: opacity linear 0.5s;
+    transition: opacity linear 0.5s;
+}
+
+    .mails-list .ng-leave.ng-leave-active {
+        opacity: 0;
     }

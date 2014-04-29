@@ -1,14 +1,33 @@
 ﻿var app = angular.module('SmtpServerForTest.UI.App', ['ngRoute', 'ngResource', 'ngAnimate']);
 
-app.factory('Mail', function ($resource) {
+app.factory('mailAPI', function ($resource) {
     return $resource('/api/mails/:id', { id: '@Id' });
 });
 
-app.controller('MailsViewCtrl', function ($scope, mails, smtpServerHub) {
+app.controller('MailsViewCtrl', function ($scope, mails, smtpServerHub, mailAPI) {
     $scope.mails = mails;
     smtpServerHub.onReceiveMessage(function (mail) {
         $scope.$apply(function () { $scope.mails.unshift(mail); });
     });
+
+    $scope.hasSelected = function () {
+        var hasSelected = false;
+        $.each($scope.mails, function () { hasSelected |= this.selected; });
+        return hasSelected;
+    };
+
+    $scope.remove = function () {
+        var selectedMails = [];
+        $.each($scope.mails, function () { if (this.selected) selectedMails.push(this); });
+
+        $.each(selectedMails, function () {
+            var mailToDelete = this;
+            mailAPI['delete'](mailToDelete, function () {
+                var index = $scope.mails.indexOf(mailToDelete);
+                $scope.mails.splice(index, 1);
+            });
+        });
+    };
 });
 
 app.config(function ($routeProvider) {
@@ -17,9 +36,9 @@ app.config(function ($routeProvider) {
             controller: 'MailsViewCtrl',
             templateUrl: '/views/mails.html',
             resolve: {
-                mails: function (Mail, $q) {
+                mails: function (mailAPI, $q) {
                     var defer = $q.defer();
-                    Mail.query(function (mails) { defer.resolve(mails); });
+                    mailAPI.query(function (mails) { defer.resolve(mails); });
                     return defer.promise;
                 }
             }
