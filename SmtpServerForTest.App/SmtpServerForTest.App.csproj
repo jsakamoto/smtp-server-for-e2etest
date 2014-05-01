@@ -398,8 +398,8 @@
     <EmbeddedResource Include="Scripts\jquery-1.11.0.js" />
     <EmbeddedResource Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="styles\site.css" />
-    <Content Include="views\mails.html" />
+    <EmbeddedResource Include="styles\site.css" />
+    <EmbeddedResource Include="views\mails.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

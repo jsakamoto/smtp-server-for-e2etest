@@ -15,16 +15,23 @@ class Program
 
             MailsController.App = app;
 
+            Console.WriteLine();
             for (; ; )
             {
-                Console.WriteLine();
                 Console.WriteLine("[O]pen UI / [Q]uit");
-                switch (Console.ReadKey().KeyChar.ToString().ToUpper())
+                var key = Console.ReadKey(intercept: true).KeyChar.ToString().ToUpper();
+                Console.WriteLine(key);
+                Console.WriteLine();
+                switch (key)
                 {
                     case "O":
                         Process.Start(app.RootURLofAPI);
                         break;
-                    case "Q": return;
+                    case "Q":
+                        Console.WriteLine("Stoping...");
+                        app.Stop();
+                        Console.WriteLine("Stoped.");
+                        return;
                     default: break;
                 }
             }

@@ -45,6 +45,10 @@ namespace Toolbelt.Net.Smtp
             {
                 JsonConvert.PopulateObject(File.ReadAllText(this.ConfigPath), this.Config);
             }
+            else
+            {
+                SaveConfig();
+            }
         }
 
         private IDisposable _httpHost;
@@ -103,6 +107,11 @@ namespace Toolbelt.Net.Smtp
         public void Dispose()
         {
             this.Stop();
+            SaveConfig();
+        }
+
+        private void SaveConfig()
+        {
             File.WriteAllText(this.ConfigPath, this.Config.ToJson());
         }
 
