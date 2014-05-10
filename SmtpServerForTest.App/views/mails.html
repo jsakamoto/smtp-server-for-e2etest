@@ -1,20 +1,33 @@
-﻿<h2>mail list</h2>
-
-<div class="command">
-    <a ng-click="remove()" ng-class="{delete:true, enabled:hasSelected()}">Delete selected mails.</a>
+﻿<div class="command">
+    <a ng-click="remove()" ng-class="{delete:true, enabled:hasSelected()}">
+        Delete selected mails.
+    </a>
 </div>
 
 <div class="mails-list">
     <div ng-repeat="mail in mails" ng-class="{mail:true, selected:mail.selected}">
-        <div class="selector">
-            <input type="checkbox" ng-model="mail.selected" />
-        </div>
-        <div class="summary">
-            <div>{{mail.Id}}</div>
-            <div>{{mail.Subject}}</div>
-            <div>{{mail.From.Address}}</div>
-            <div>{{mail.To}}</div>
-            <div>{{mail.Date}}</div>
-        </div>
+        <label>
+            <div class="selector">
+                <input type="checkbox" ng-model="mail.selected" />
+            </div>
+            <div class="summary">
+                <!--<div>{{mail.Id}}</div>-->
+                <div>{{mail.Subject}}</div>
+                <div class="from">
+                    from: {{mail.From|mailaddress}}
+                </div>
+                <div class="to">
+                    to: {{mail.To|each:'mailaddress'|join:', '}}
+                </div>
+                <!--<div>{{mail.CC|each:'mailaddress'|join:', '}}</div>
+                <div>{{mail.Date}}</div>-->
+            </div>
+        </label>
+    </div>
+</div>
+
+<div class="mail-view">
+    <div class="test-content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper mi, id sollicitudin urna fermentum ut fusce varius nisl ac ipsum gravida vel pretium tellus.
     </div>
 </div>

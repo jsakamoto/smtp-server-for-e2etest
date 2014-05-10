@@ -2,14 +2,37 @@
 <html>
 <head>
     <title></title>
+    <link href="Content/normalize.css" rel="stylesheet" />
     <link href="styles/site.css" rel="stylesheet" />
 </head>
 <body ng-app="SmtpServerForTest.UI.App">
-    <h1>TITLE</h1>
+    <header>
+        <h1>(Title)</h1>
+        <div class="actions">
+            <a href="#/">
+                action1
+            </a>
+            <a href="#/">
+                action2
+            </a>
+            <a href="#/config">
+                config
+            </a>
+        </div>
+    </header>
 
-    <div ng-view>
+    <div ng-view class="content-view">
         <!-- render view here -->
     </div>
+
+    <footer>
+        <div class="acknowledgment">
+            AngularJS |
+            ASP.NET WebAPI |
+            SignalR |
+            Compatible with Mono
+        </div>
+    </footer>
 
     <script src="scripts/jquery-1.11.0.js"></script>
     <script src="scripts/angular.js"></script>
