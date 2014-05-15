@@ -12,7 +12,7 @@ namespace Toolbelt.Net.Smtp
     {
         public static void NotifyReceiveMessage(SmtpMessage message, IHubConnectionContext clients)
         {
-            clients.All.ReceiveMessage(message);
+            clients.All.ReceiveMessage(message.ToSimpleFormat());
         }
     }
 }

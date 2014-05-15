@@ -75,12 +75,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Toolbelt.Net.Smtp.SmtpMessage, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Toolbelt.Net.Smtp.SmtpMessage, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpMessage.1.0.0.4-beta1\lib\net40\Toolbelt.Net.Smtp.SmtpMessage.dll</HintPath>
+      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpMessage.1.0.0.7-beta1\lib\net40\Toolbelt.Net.Smtp.SmtpMessage.dll</HintPath>
     </Reference>
-    <Reference Include="Toolbelt.Net.Smtp.SmtpServerCore">
-      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpServerCore.1.0.0.0-beta1\lib\net40\Toolbelt.Net.Smtp.SmtpServerCore.dll</HintPath>
+    <Reference Include="Toolbelt.Net.Smtp.SmtpServerCore, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpServerCore.1.0.0.1-beta\lib\net40\Toolbelt.Net.Smtp.SmtpServerCore.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

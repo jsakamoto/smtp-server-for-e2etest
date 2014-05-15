@@ -16,6 +16,7 @@ namespace Toolbelt.Net.Smtp
             appBuilder.UseCors(CorsOptions.AllowAll);
 
             var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

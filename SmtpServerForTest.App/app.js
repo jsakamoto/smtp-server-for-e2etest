@@ -1,99 +1,62 @@
-﻿var app = angular.module('SmtpServerForTest.UI.App', ['ngRoute', 'ngResource', 'ngAnimate']);
+﻿(function () {
+    var app = angular.module('SmtpServerForTest.UI.App', ['ngRoute', 'ngResource', 'ngAnimate', 'ui.bootstrap']);
 
-app.factory('mailAPI', function ($resource, $q) {
-    var res = $resource('/api/mails/:id', { id: '@Id' });
-    return {
-        query: function () {
+    app.run(function ($rootScope) {
+        $rootScope.$on('$routeChangeSuccess', function (ev, data) {
+            $rootScope.controller = (data.$$route || { controller: '' }).controller;
+        })
+    });
+
+    app.config(function ($routeProvider, $httpProvider) {
+        $routeProvider
+            .when('/', { controller: 'MailsController', templateUrl: '/views/mails.html' })
+            .when('/config', { controller: 'ConfigController', templateUrl: '/views/config.html' });
+        if (!$httpProvider.defaults.headers.get) $httpProvider.defaults.headers.get = {};
+        $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
+    });
+
+    app.factory('mailAPI', function ($resource, $q) {
+        var res = $resource('/api/mails/simple/:id', { id: '@Id' });
+        return {
+            query: function () {
+                var defer = $q.defer();
+                res.query(function (mails) { defer.resolve(mails); });
+                return defer.promise;
+            },
+            remove: function (param) {
+                var defer = $q.defer();
+                res.remove(param, function () { defer.resolve(); });
+                return defer.promise;
+            }
+        };
+    });
+
+    app.factory('configAPI', function ($resource, $q) {
+        var res = $resource('/api/config');
+
+        var getterFunc = res.get;
+        res.get = function () {
             var defer = $q.defer();
-            res.query(function (mails) { defer.resolve(mails); });
+            getterFunc.apply(res, [function (config) { defer.resolve(config); }]);
             return defer.promise;
-        }
-    };
-});
-
-app.controller('MailsViewCtrl', function ($scope, mailAPI, smtpServerHub) {
-
-    mailAPI.query().then(function (mails) {
-        $scope.mails = mails;
+        };
+        return res;
     });
 
-    smtpServerHub.onReceiveMessage(function (mail) {
-        $scope.$apply(function () { $scope.mails.unshift(mail); });
-    });
-
-    $scope.hasSelected = function () {
-        var hasSelected = false;
-        var mails = $scope.mails || [];
-        $.each(mails, function () { hasSelected |= this.selected; });
-        return hasSelected;
-    };
-
-    $scope.remove = function () {
-        var selectedMails = [];
-        $.each($scope.mails, function () { if (this.selected) selectedMails.push(this); });
-
-        $.each(selectedMails, function () {
-            var mailToDelete = this;
-            mailToDelete.$remove(function () {
-                var index = $scope.mails.indexOf(mailToDelete);
-                $scope.mails.splice(index, 1);
-            });
+    app.factory('smtpServerHub', function () {
+        var conn = $.hubConnection();
+        var hub = conn.createHubProxy("SmtpServerHub");
+        var hubProxy = {
+            _callbacks: [],
+            _apply: function (arg) {
+                $.each(this._callbacks, function () { (this)(arg); });
+            },
+            onReceiveMessage: function (callback) { this._callbacks.push(callback); }
+        };
+        hub.on("ReceiveMessage", function (smtpMessage) {
+            hubProxy._apply(smtpMessage);
         });
-    };
-});
-
-app.config(function ($routeProvider) {
-    $routeProvider
-        .when('/', { controller: 'MailsViewCtrl', templateUrl: '/views/mails.html' })
-        .when('/config', { controller: 'ConfigCtrl', templateUrl: '/views/config.html' })
-    ;
-});
-
-app.factory('smtpServerHub', function () {
-    var conn = $.hubConnection();
-    var hub = conn.createHubProxy("SmtpServerHub");
-    var hubProxy = {
-        _callbacks: [],
-        _apply: function (arg) {
-            $.each(this._callbacks, function () { (this)(arg); });
-        },
-        onReceiveMessage: function (callback) { this._callbacks.push(callback); }
-    };
-    hub.on("ReceiveMessage", function (smtpMessage) {
-        hubProxy._apply(smtpMessage);
+        conn.start();
+        return hubProxy;
     });
-    conn.start();
-    return hubProxy;
-});
-
-app.filter('mailaddress', function () {
-    return function (input) {
-        var output = input.DisplayName;
-        output += output == '' ? input.Address : ' <' + input.Address + '>';
-        return output;
-    };
-});
-
-app.filter('each', function ($injector) {
-    var filters = {};
-    return function (input, filterName) {
-        var filter = filters[filterName];
-        if (filter == null) {
-            filter = $injector.get('$filter')(filterName);
-            filters[filterName] = filter;
-        }
-        var output = [];
-        $.each(input, function () { output.push(filter(this)); });
-        return output;
-    };
-});
-
-app.filter('join', function () {
-    return function (input, separator) {
-        /// <param name="input" type="Array"></param>
-        return input.join(separator);
-    }
-});
-
-app.controller('ConfigCtrl', function ($scope) {
-});
+})();

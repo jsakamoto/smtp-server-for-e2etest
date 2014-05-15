@@ -13,8 +13,6 @@ class Program
         {
             app.Start();
 
-            MailsController.App = app;
-
             Console.WriteLine();
             for (; ; )
             {

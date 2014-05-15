@@ -40,6 +40,10 @@ namespace Toolbelt.Net.Smtp
 
         public EndPoint ApiEndPoint { get; set; }
 
+        public bool EnableSMTPAuth { get; set; }
+
+        public Account[] Accounts { get; set; }
+
         public AppConfig()
         {
             this.SmtpEndPoints = new[] { 
@@ -48,8 +52,10 @@ namespace Toolbelt.Net.Smtp
                 new EndPoint("::1", 25),
                 new EndPoint("::1", 587)
             };
-            
+
             this.ApiEndPoint = new EndPoint("localhost", 8025);
+            this.EnableSMTPAuth = true;
+            this.Accounts = new Account[0];
         }
     }
 }

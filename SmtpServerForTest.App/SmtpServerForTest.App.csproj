@@ -98,27 +98,35 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Toolbelt.Net.Smtp.SmtpMessage, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Toolbelt.Net.Smtp.SmtpMessage, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpMessage.1.0.0.4-beta1\lib\net40\Toolbelt.Net.Smtp.SmtpMessage.dll</HintPath>
+      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpMessage.1.0.0.7-beta1\lib\net40\Toolbelt.Net.Smtp.SmtpMessage.dll</HintPath>
     </Reference>
-    <Reference Include="Toolbelt.Net.Smtp.SmtpServerCore">
-      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpServerCore.1.0.0.0-beta1\lib\net40\Toolbelt.Net.Smtp.SmtpServerCore.dll</HintPath>
+    <Reference Include="Toolbelt.Net.Smtp.SmtpServerCore, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpServerCore.1.0.0.1-beta\lib\net40\Toolbelt.Net.Smtp.SmtpServerCore.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Code\ResourceFileSystem.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="AppConfig.cs" />
+    <Compile Include="Code\SmtpMessageExtension.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="MailsController.cs" />
     <Compile Include="SmtpServerHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ValueController.cs" />
+    <Compile Include="ConfigController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="Content\bootstrap-theme.css.map" />
+    <EmbeddedResource Include="Content\bootstrap.css.map" />
+    <EmbeddedResource Include="fonts\glyphicons-halflings-regular.eot" />
+    <EmbeddedResource Include="fonts\glyphicons-halflings-regular.ttf" />
+    <EmbeddedResource Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Scripts\angular-animate.min.js.map" />
     <EmbeddedResource Include="Scripts\angular-cookies.min.js.map" />
@@ -407,9 +415,33 @@
     <EmbeddedResource Include="Scripts\jquery-1.11.0.intellisense.js" />
     <EmbeddedResource Include="Scripts\jquery-1.11.0.js" />
     <EmbeddedResource Include="Scripts\jquery-1.11.0.min.js" />
-    <Content Include="Content\normalize.css" />
-    <Content Include="Scripts\_references.js" />
-    <EmbeddedResource Include="styles\site.css" />
+    <EmbeddedResource Include="app.filters.js" />
+    <EmbeddedResource Include="app.config-controller.js" />
+    <EmbeddedResource Include="app.mails-controller.js" />
+    <EmbeddedResource Include="Content\bootstrap-theme.css" />
+    <EmbeddedResource Include="Content\bootstrap-theme.min.css" />
+    <EmbeddedResource Include="Content\bootstrap.css" />
+    <EmbeddedResource Include="Content\bootstrap.min.css" />
+    <EmbeddedResource Include="Content\images\add-cb-16.png" />
+    <EmbeddedResource Include="Content\images\back-cb.png" />
+    <EmbeddedResource Include="Content\images\attachment.png" />
+    <EmbeddedResource Include="Content\images\delete-cb.png" />
+    <EmbeddedResource Include="Content\images\delete-b-16.png" />
+    <EmbeddedResource Include="Content\images\edit-b-16.png" />
+    <EmbeddedResource Include="Content\images\settings-cw.png" />
+    <EmbeddedResource Include="Content\normalize.css" />
+    <EmbeddedResource Include="fonts\glyphicons-halflings-regular.svg" />
+    <EmbeddedResource Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <EmbeddedResource Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <EmbeddedResource Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <EmbeddedResource Include="Scripts\angular-ui\ui-bootstrap.min.js" />
+    <EmbeddedResource Include="Scripts\bootstrap.js" />
+    <EmbeddedResource Include="Scripts\bootstrap.min.js" />
+    <EmbeddedResource Include="Scripts\linq-vsdoc.js" />
+    <EmbeddedResource Include="Scripts\linq.js" />
+    <EmbeddedResource Include="Scripts\linq.min.js" />
+    <EmbeddedResource Include="Scripts\_references.js" />
+    <EmbeddedResource Include="Content\site.css" />
     <EmbeddedResource Include="views\mails.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

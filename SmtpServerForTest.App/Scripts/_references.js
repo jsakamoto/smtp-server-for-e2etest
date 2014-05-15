@@ -3,3 +3,4 @@
 /// <reference path="angular-route.js" />
 /// <reference path="angular-animate.js" />
 /// <reference path="jquery.signalr-2.0.3.js" />
+/// <reference path="linq.js" />

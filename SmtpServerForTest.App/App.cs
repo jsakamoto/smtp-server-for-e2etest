@@ -9,11 +9,20 @@ using Newtonsoft.Json;
 
 namespace Toolbelt.Net.Smtp
 {
+    using System.Net;
     using SignalR = Microsoft.AspNet.SignalR;
 
     public class App : IDisposable
     {
-        public AppConfig Config { get; set; }
+        public static App Current { get; private set; }
+
+        protected AppConfig _Config;
+
+        public AppConfig Config
+        {
+            get { return _Config; }
+            set { _Config = value; this.SaveConfig(); this.RestartSmtpHostIfRunning(); }
+        }
 
         public string DataPath
         {
@@ -40,38 +49,51 @@ namespace Toolbelt.Net.Smtp
 
         public App()
         {
-            this.Config = new AppConfig();
+            App.Current = this;
+            var config = new AppConfig();
             if (File.Exists(this.ConfigPath))
             {
-                JsonConvert.PopulateObject(File.ReadAllText(this.ConfigPath), this.Config);
+                JsonConvert.PopulateObject(File.ReadAllText(this.ConfigPath), config);
             }
-            else
-            {
-                SaveConfig();
-            }
+            this.Config = config;
         }
 
-        private IDisposable _httpHost;
+        protected IDisposable _httpHost;
 
-        private SmtpServerCore _smtpHost;
+        protected SmtpServerCore _smtpHost;
 
         public void Start()
         {
             lock (this)
             {
-                if (_httpHost == null)
-                {
-                    var baseAddress = string.Format("http://{0}:{1}/", this.Config.ApiEndPoint.Address, this.Config.ApiEndPoint.Port);
-                    _httpHost = WebApp.Start<Startup>(url: baseAddress);
-                }
-                if (_smtpHost == null)
-                {
-                    _smtpHost = new SmtpServerCore(
-                        this.Config.SmtpEndPoints.Select(ep => ep.ToIPEndPoint())
-                        );
-                    _smtpHost.ReceiveMessage += OnReceiveMessage;
-                    _smtpHost.Start();
-                }
+                StartHttpHost();
+                StartSmtpHost();
+            }
+        }
+
+        protected void StartHttpHost()
+        {
+            if (_httpHost == null)
+            {
+                var baseAddress = string.Format("http://{0}:{1}/", this.Config.ApiEndPoint.Address, this.Config.ApiEndPoint.Port);
+                _httpHost = WebApp.Start<Startup>(url: baseAddress);
+            }
+        }
+
+        protected void StartSmtpHost()
+        {
+            if (_smtpHost == null)
+            {
+                var credentials =
+                    this.Config.EnableSMTPAuth ?
+                    this.Config.Accounts.Select(a => a.ToNetworkCredential()) :
+                    Enumerable.Empty<NetworkCredential>();
+                _smtpHost = new SmtpServerCore(
+                    this.Config.SmtpEndPoints.Select(ep => ep.ToIPEndPoint()),
+                    credentials);
+
+                _smtpHost.ReceiveMessage += OnReceiveMessage;
+                _smtpHost.Start();
             }
         }
 
@@ -90,16 +112,46 @@ namespace Toolbelt.Net.Smtp
         {
             lock (this)
             {
-                if (_httpHost != null)
-                {
-                    _httpHost.Dispose();
-                    _httpHost = null;
-                }
+                StopHttpHost();
+                StopSmtpHost();
+            }
+        }
+
+        public void WaiteForEndOfAllSessions()
+        {
+            if (this._smtpHost != null)
+            {
+                this._smtpHost.WaiteForEndOfAllSessions();
+            }
+        }
+
+        protected void StopHttpHost()
+        {
+            if (_httpHost != null)
+            {
+                _httpHost.Dispose();
+                _httpHost = null;
+            }
+        }
+
+        protected void StopSmtpHost()
+        {
+            if (_smtpHost != null)
+            {
+                _smtpHost.Stop();
+                _smtpHost.Dispose();
+                _smtpHost = null;
+            }
+        }
+
+        protected void RestartSmtpHostIfRunning()
+        {
+            lock (this)
+            {
                 if (_smtpHost != null)
                 {
-                    _smtpHost.Stop();
-                    _smtpHost.Dispose();
-                    _smtpHost = null;
+                    StopSmtpHost();
+                    StartSmtpHost();
                 }
             }
         }

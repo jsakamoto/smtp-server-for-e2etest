@@ -1,21 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-    <link href="Content/normalize.css" rel="stylesheet" />
-    <link href="styles/site.css" rel="stylesheet" />
+    <title>SMTP Server for Dev/Automated System Test</title>
+    <link href="content/bootstrap.css" rel="stylesheet" />
+    <link href="content/site.css" rel="stylesheet" />
 </head>
 <body ng-app="SmtpServerForTest.UI.App">
     <header>
-        <h1>(Title)</h1>
+        <h1>SMTP Server for Dev/Automated System Test</h1>
         <div class="actions">
-            <a href="#/">
-                action1
-            </a>
-            <a href="#/">
-                action2
-            </a>
-            <a href="#/config">
+            <a href="#/config" ng-show="controller != 'ConfigController'" id="link-config" class="icon-link" title="Configuration">
                 config
             </a>
         </div>
@@ -30,17 +24,25 @@
             AngularJS |
             ASP.NET WebAPI |
             SignalR |
+            Bootstrap CSS |
+            linq.js |
             Compatible with Mono
         </div>
     </footer>
 
     <script src="scripts/jquery-1.11.0.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.js"></script>
     <script src="scripts/angular-route.js"></script>
     <script src="scripts/angular-resource.js"></script>
     <script src="scripts/angular-animate.js"></script>
+    <script src="scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="scripts/jquery.signalr-2.0.3.js"></script>
     <script src="signalr/hubs"></script>
+    <script src="scripts/linq.min.js"></script>
     <script src="app.js"></script>
+    <script src="app.filters.js"></script>
+    <script src="app.mails-controller.js"></script>
+    <script src="app.config-controller.js"></script>
 </body>
 </html>
