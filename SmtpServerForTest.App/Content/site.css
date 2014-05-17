@@ -42,6 +42,10 @@ header {
     header h1 {
         float: left;
         line-height: 3em;
+        background-image:url(../favicon.png);
+        background-position:left center;
+        background-repeat:no-repeat;
+        padding-left:38px;
     }
 
     header .actions {
