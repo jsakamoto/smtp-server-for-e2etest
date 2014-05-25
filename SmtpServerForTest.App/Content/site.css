@@ -42,10 +42,10 @@ header {
     header h1 {
         float: left;
         line-height: 3em;
-        background-image:url(../favicon.png);
-        background-position:left center;
-        background-repeat:no-repeat;
-        padding-left:38px;
+        background-image: url(../favicon.png);
+        background-position: left center;
+        background-repeat: no-repeat;
+        padding-left: 38px;
     }
 
     header .actions {
@@ -78,7 +78,7 @@ header {
 footer {
     position: fixed;
     bottom: 0;
-    padding: 0.5em;
+    padding: 1em 0.5em 0 0.5em;
     width: 100%;
     height: 3em;
     border-top: 1px solid #ccc;
@@ -88,6 +88,33 @@ footer {
     footer .acknowledgment {
         font-size: 75%;
     }
+
+        footer .acknowledgment .banner {
+            background-position: left center;
+            background-repeat: no-repeat;
+            padding-left: 20px;
+            display: inline-block;
+            min-height: 1.4em;
+            line-height: 1.4em;
+        }
+
+        footer .acknowledgment .angularjs {
+            background-image: url(images/angularjs-g-16.png);
+        }
+
+        footer .acknowledgment .mono {
+            background-image: url(images/mono-g-16.png);
+        }
+
+        footer .acknowledgment .bootstrapcss {
+            background-image: url(images/bootstrapcss-g-16.png);
+        }
+
+        footer .acknowledgment .aspnet {
+            padding-left: 28px;
+            background-image: url(images/aspnet-16.png);
+        }
+
 
 .command, .mails-list {
     left: 0;
