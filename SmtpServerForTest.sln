@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpServerForTest.ConsoleApp", "SmtpServerForTest.ConsoleApp\SmtpServerForTest.ConsoleApp.csproj", "{AAC047DF-8A69-4F84-9113-BC507BB1863A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpServerForTest.App", "SmtpServerForTest.App\SmtpServerForTest.App.csproj", "{7453257B-ACBB-4F1B-88EA-24E40F0DA8F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpServerForTest.App.Test", "SmtpServerForTest.App.Test\SmtpServerForTest.App.Test.csproj", "{BAFBE9C3-904A-4D1F-9B37-FEAEBC3DD65D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpServerForTest.WinFormApp", "SmtpServerForTest.WinFormApp\SmtpServerForTest.WinFormApp.csproj", "{BEE54FEA-9982-4219-810F-B1B51FE79013}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{BAFBE9C3-904A-4D1F-9B37-FEAEBC3DD65D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAFBE9C3-904A-4D1F-9B37-FEAEBC3DD65D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAFBE9C3-904A-4D1F-9B37-FEAEBC3DD65D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEE54FEA-9982-4219-810F-B1B51FE79013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE54FEA-9982-4219-810F-B1B51FE79013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE54FEA-9982-4219-810F-B1B51FE79013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE54FEA-9982-4219-810F-B1B51FE79013}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
