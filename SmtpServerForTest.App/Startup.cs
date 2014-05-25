@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Http;
 using Microsoft.Owin.Cors;
@@ -26,16 +28,44 @@ namespace Toolbelt.Net.Smtp
 
             appBuilder.MapSignalR();
 
-            //appBuilder.UseStaticFiles(new StaticFileOptions
-            //{
-            //    FileSystem = new EmbededResourceFileSystem2("Toolbelt.Net.Smtp")
-            //});
-            appBuilder.UseFileServer(new FileServerOptions
+            ConfigureFileServer(appBuilder);
+        }
+
+#if DEBUG
+        private void ConfigureFileServer(IAppBuilder app)
+        {
+            var slnDir = EnumContainerDir().FirstOrDefault(dir => Directory.GetFiles(dir, "*.sln").Any());
+            var projDir = Path.Combine(slnDir, "SmtpServerForTest.App");
+            app.UseFileServer(new FileServerOptions
             {
                 EnableDirectoryBrowsing = false,
-                FileSystem = new PhysicalFileSystem(@"C:\Projects\My\Lib\SmtpServer\SmtpServerForTest\SmtpServerForTest.App"),
-                //FileSystem = new EmbeddedResourceFileSystem("Toolbelt.Net.Smtp")
+                FileSystem = new PhysicalFileSystem(projDir),
             });
         }
+
+        public IEnumerable<string> EnumContainerDir()
+        {
+            var dir = AppDomain.CurrentDomain.BaseDirectory;
+            while (dir != null)
+            {
+                yield return dir;
+                dir = Path.GetDirectoryName(dir);
+            }
+        }
+#else
+        private void ConfigureFileServer(IAppBuilder app)
+        {
+            var fileSystem = new EmbededResourceFileSystem2("Toolbelt.Net.Smtp");
+            app.UseDefaultFiles(new DefaultFilesOptions
+            {
+                DefaultFileNames = new[] { "index.html" }.ToList(),
+                FileSystem = fileSystem
+            });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileSystem = fileSystem
+            });
+        }
+#endif
     }
 }

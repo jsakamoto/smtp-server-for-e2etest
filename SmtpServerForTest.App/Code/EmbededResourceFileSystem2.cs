@@ -31,8 +31,8 @@ namespace Toolbelt.Net.Smtp.Code
                 return false;
             }
 
-            var fixpath = (_baseNamespace + "." + subpath.Substring(1).Replace('/', '.')).ToLower();
-            fixpath = _resourceNames.FirstOrDefault(name => name.ToLower() == fixpath);
+            var fixpath = (_baseNamespace + "." + subpath.Substring(1).Replace('/', '.').Replace('-', '_')).ToLower();
+            fixpath = _resourceNames.FirstOrDefault(name => name.ToLower().Replace('-', '_') == fixpath);
             if (fixpath == null)
             {
                 fileInfo = null;
@@ -45,7 +45,19 @@ namespace Toolbelt.Net.Smtp.Code
 
         public bool TryGetDirectoryContents(string subpath, out IEnumerable<IFileInfo> contents)
         {
-            throw new NotImplementedException();
+            if (subpath == "/")
+            {
+                var fileInfo = default(IFileInfo);
+                var found = this.TryGetFileInfo("/index.html", out fileInfo);
+                if (found)
+                {
+                    contents = new[] { fileInfo };
+                    return true;
+                }
+
+            }
+            contents = Enumerable.Empty<IFileInfo>();
+            return false;
         }
     }
 }
