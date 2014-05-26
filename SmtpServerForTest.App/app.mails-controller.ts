@@ -10,12 +10,19 @@
     }
 
     app.controller('MailsController', function ($scope: $Scope, $rootScope, mailAPI, smtpServerHub: SmtpServerHub) {
-        $rootScope.foo = "bar";
+
+        var userSettings: { enableDesktopNotification: boolean } = JSON.parse(window.localStorage.getItem('userSettings') || '{"enableDesktopNotification":false}');
 
         mailAPI.query().then(mails => $scope.mails = mails);
 
         smtpServerHub.onReceiveMessage(mail => {
-            $scope.$apply(() => $scope.mails.unshift(mail));
+            $scope.$apply(() => {
+                $scope.mails.unshift(mail);
+                if (userSettings.enableDesktopNotification) {
+                    var notify = new Notification('You got a mail.', { body: mail.Subject, icon:'/favicon.png', tag:'SmtpServerForTest' });
+                    setTimeout(() => notify.close(), 5000);
+                }
+            });
         });
 
         var getSelectedMails = () => {

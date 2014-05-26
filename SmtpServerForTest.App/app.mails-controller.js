@@ -3,7 +3,7 @@
     var app = angular.module('SmtpServerForTest.UI.App');
 
     app.controller('MailsController', function ($scope, $rootScope, mailAPI, smtpServerHub) {
-        $rootScope.foo = "bar";
+        var userSettings = JSON.parse(window.localStorage.getItem('userSettings') || '{"enableDesktopNotification":false}');
 
         mailAPI.query().then(function (mails) {
             return $scope.mails = mails;
@@ -11,7 +11,13 @@
 
         smtpServerHub.onReceiveMessage(function (mail) {
             $scope.$apply(function () {
-                return $scope.mails.unshift(mail);
+                $scope.mails.unshift(mail);
+                if (userSettings.enableDesktopNotification) {
+                    var notify = new Notification('You got a mail.', { body: mail.Subject, icon: '/favicon.png', tag: 'SmtpServerForTest' });
+                    setTimeout(function () {
+                        return notify.close();
+                    }, 5000);
+                }
             });
         });
 

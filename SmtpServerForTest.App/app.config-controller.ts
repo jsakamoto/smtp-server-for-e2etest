@@ -1,4 +1,16 @@
-﻿module _ {
+﻿declare class Notification {
+    constructor(title: string, options: any);
+    close(): void;
+}
+
+interface Window {
+    Notification: {
+        permission: string;
+        requestPermission(callback: Function): void;
+    }
+}
+
+module _ {
     var app = angular.module('SmtpServerForTest.UI.App');
 
     interface EndPoint {
@@ -9,6 +21,9 @@
     interface IConfigScope extends ng.IScope {
         config: any;
         saveConfig: () => void;
+        userSettings: { enableDesktopNotification: boolean; };
+        saveUserSettings: () => void;
+        desktopNotificationPermission: string;
     }
 
     interface IConfigEditorScope extends IConfigScope {
@@ -22,9 +37,11 @@
         target: any;
     }
 
+
     app.controller('ConfigController', ($scope: IConfigScope, $modal, $q: ng.IQService, configAPI) => {
 
         configAPI.get().then(config => {
+            // Setup server configuration save/watch.
             $scope.config = config;
             $scope.saveConfig = () => {
                 $scope.saveConfig = () => { $scope.config.$save(); };
@@ -32,6 +49,28 @@
             $scope.$watch(
                 () => JSON.stringify($scope.config),
                 () => $scope.saveConfig());
+
+            // Setup user settings save/watch.
+            $scope.userSettings = JSON.parse(window.localStorage.getItem('userSettings') || '{"enableDesktopNotification":false}');
+            var updateDesktopNotificationPermission = () => {
+                $scope.desktopNotificationPermission = window.Notification == null ? 'notsupported' : window.Notification.permission;
+                if ($scope.desktopNotificationPermission == 'notsupported' || $scope.desktopNotificationPermission == 'denied')
+                    $scope.userSettings.enableDesktopNotification = false;
+            };
+            updateDesktopNotificationPermission();
+
+            $scope.saveUserSettings = () => {
+                window.localStorage.setItem('userSettings', JSON.stringify($scope.userSettings));
+
+                if (window.Notification && $scope.userSettings.enableDesktopNotification && window.Notification.permission == 'default') {
+                    window.Notification.requestPermission(() => {
+                        $scope.$apply(updateDesktopNotificationPermission);
+                    });
+                }
+            };
+            $scope.$watch(
+                () => JSON.stringify($scope.userSettings),
+                () => $scope.saveUserSettings());
         });
     });
 

@@ -313,3 +313,8 @@ footer {
 .row {
     margin-left: 3em;
 }
+
+
+label.disabled {
+    color:#888;
+}

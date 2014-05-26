@@ -4,6 +4,7 @@
 
     app.controller('ConfigController', function ($scope, $modal, $q, configAPI) {
         configAPI.get().then(function (config) {
+            // Setup server configuration save/watch.
             $scope.config = config;
             $scope.saveConfig = function () {
                 $scope.saveConfig = function () {
@@ -14,6 +15,30 @@
                 return JSON.stringify($scope.config);
             }, function () {
                 return $scope.saveConfig();
+            });
+
+            // Setup user settings save/watch.
+            $scope.userSettings = JSON.parse(window.localStorage.getItem('userSettings') || '{"enableDesktopNotification":false}');
+            var updateDesktopNotificationPermission = function () {
+                $scope.desktopNotificationPermission = window.Notification == null ? 'notsupported' : window.Notification.permission;
+                if ($scope.desktopNotificationPermission == 'notsupported' || $scope.desktopNotificationPermission == 'denied')
+                    $scope.userSettings.enableDesktopNotification = false;
+            };
+            updateDesktopNotificationPermission();
+
+            $scope.saveUserSettings = function () {
+                window.localStorage.setItem('userSettings', JSON.stringify($scope.userSettings));
+
+                if (window.Notification && $scope.userSettings.enableDesktopNotification && window.Notification.permission == 'default') {
+                    window.Notification.requestPermission(function () {
+                        $scope.$apply(updateDesktopNotificationPermission);
+                    });
+                }
+            };
+            $scope.$watch(function () {
+                return JSON.stringify($scope.userSettings);
+            }, function () {
+                return $scope.saveUserSettings();
             });
         });
     });
