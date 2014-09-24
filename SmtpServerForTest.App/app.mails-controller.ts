@@ -9,7 +9,7 @@
         remove: () => void;
     }
 
-    app.controller('MailsController', function ($scope: $Scope, $rootScope, mailAPI, smtpServerHub: SmtpServerHub) {
+    app.controller('MailsController', function ($scope: $Scope, $rootScope, mailAPI, smtpServerHub: ISmtpServerHub) {
 
         var userSettings: { enableDesktopNotification: boolean } = JSON.parse(window.localStorage.getItem('userSettings') || '{"enableDesktopNotification":false}');
 
@@ -19,10 +19,18 @@
             $scope.$apply(() => {
                 $scope.mails.unshift(mail);
                 if (userSettings.enableDesktopNotification) {
-                    var notify = new Notification('You got a mail.', { body: mail.Subject, icon:'/favicon.png', tag:'SmtpServerForTest' });
+                    var notify = new Notification('You got a mail.', { body: mail.Subject, icon: '/favicon.png', tag: 'SmtpServerForTest' });
                     setTimeout(() => notify.close(), 5000);
                 }
             });
+        });
+
+        smtpServerHub.onRemoveMessage(mailId => {
+            var mailToDelete = Enumerable.from($scope.mails).firstOrDefault(m => m.Id == mailId);
+            if (mailToDelete != null) {
+                var index = $scope.mails.indexOf(mailToDelete);
+                $scope.$apply(() => $scope.mails.splice(index, 1));
+            }
         });
 
         var getSelectedMails = () => {
@@ -55,13 +63,7 @@
         $scope.remove = () => {
             var selectedMails = getSelectedMails().toArray();
             Enumerable.from(selectedMails)
-                .forEach(m => {
-                    mailAPI.remove({ id: m.Id })
-                        .then(() => {
-                            var index = $scope.mails.indexOf(m);
-                            $scope.mails.splice(index, 1);
-                        });
-                });
+                .forEach(m => { mailAPI.remove({ id: m.Id }); });
         };
     });
 }

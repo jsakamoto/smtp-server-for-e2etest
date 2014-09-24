@@ -112,7 +112,7 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="Code\EmbededResourceFileSystem2.cs" />
+    <Compile Include="Code\EmbeddedResourceFileSystem2.cs" />
     <Compile Include="AppConfig.cs" />
     <Compile Include="Code\SmtpMessageExtension.cs" />
     <Compile Include="Extension.cs" />

@@ -21,6 +21,18 @@
             });
         });
 
+        smtpServerHub.onRemoveMessage(function (mailId) {
+            var mailToDelete = Enumerable.from($scope.mails).firstOrDefault(function (m) {
+                return m.Id == mailId;
+            });
+            if (mailToDelete != null) {
+                var index = $scope.mails.indexOf(mailToDelete);
+                $scope.$apply(function () {
+                    return $scope.mails.splice(index, 1);
+                });
+            }
+        });
+
         var getSelectedMails = function () {
             return Enumerable.from($scope.mails).where(function (m) {
                 return m.selected;
@@ -55,10 +67,7 @@
         $scope.remove = function () {
             var selectedMails = getSelectedMails().toArray();
             Enumerable.from(selectedMails).forEach(function (m) {
-                mailAPI.remove({ id: m.Id }).then(function () {
-                    var index = $scope.mails.indexOf(m);
-                    $scope.mails.splice(index, 1);
-                });
+                mailAPI.remove({ id: m.Id });
             });
         };
     });

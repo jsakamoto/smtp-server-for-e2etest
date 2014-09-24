@@ -1,5 +1,6 @@
 ﻿
 module _ {
+
     var app = angular.module('SmtpServerForTest.UI.App', ['ngRoute', 'ngResource', 'ngAnimate', 'ui.bootstrap']);
 
     app.run($rootScope => {
@@ -32,17 +33,24 @@ module _ {
         };
     });
 
-    export class SmtpServerHub {
-        private _callbacks: Function[] = [];
-        public _apply(arg: any): void { Enumerable.from(this._callbacks).forEach(fn => fn(arg)); }
-        public onReceiveMessage(callback: Function): void { this._callbacks.push(callback); }
+    export interface ISmtpServerHub {
+        onReceiveMessage(callback: Function): void;
+        onRemoveMessage(callback: Function): void;
     }
 
-    app.factory('smtpServerHub', () => {
+    class SmtpServerHub {
+        _callbacks = { onReceive: [], onRemove: [] };
+        _apply(callbacks: Function[], arg: any): void { Enumerable.from(callbacks).forEach(fn => fn(arg)); }
+        onReceiveMessage(callback: Function): void { this._callbacks.onReceive.push(callback); }
+        onRemoveMessage(callback: Function): void { this._callbacks.onRemove.push(callback); }
+    }
+
+    app.factory('smtpServerHub', (): ISmtpServerHub => {
         var conn = $.hubConnection();
         var hub = conn.createHubProxy("SmtpServerHub");
         var hubProxy = new SmtpServerHub();
-        hub.on("ReceiveMessage", message => hubProxy._apply(message));
+        hub.on("ReceiveMessage", message => hubProxy._apply(hubProxy._callbacks.onReceive, message));
+        hub.on("RemoveMessage", id => hubProxy._apply(hubProxy._callbacks.onRemove, id));
         conn.start();
         return hubProxy;
     });

@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using SignalR = Microsoft.AspNet.SignalR;
 
 namespace Toolbelt.Net.Smtp
 {
@@ -34,6 +35,22 @@ namespace Toolbelt.Net.Smtp
         }
 
         [HttpDelete]
+        public void Delete()
+        {
+            var hubContext = SignalR.GlobalHost.ConnectionManager.GetHubContext<SmtpServerHub>();
+            Directory.GetFiles(App.Current.MailFolderPath, "*.eml")
+                .Select(path => new { path, SmtpMessage.CreateFrom(path).Id })
+                .ToList()
+                .ForEach(m =>
+                {
+                    File.Delete(m.path);
+
+                    // notify via SignalR
+                    SmtpServerHub.NotifyRemoveMessage(m.Id, hubContext.Clients);
+                });
+        }
+
+        [HttpDelete]
         [Route("simple/{id}")]
         [Route("{id}")]
         public void Delete(Guid id)
@@ -43,6 +60,11 @@ namespace Toolbelt.Net.Smtp
                 .First(a => a.Id == id)
                 .path;
             File.Delete(pathToDelete);
+
+            // notify via SignalR
+            var hubContext = SignalR.GlobalHost.ConnectionManager.GetHubContext<SmtpServerHub>();
+            SmtpServerHub.NotifyRemoveMessage(id, hubContext.Clients);
+
         }
 
 

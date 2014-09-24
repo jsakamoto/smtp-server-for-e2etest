@@ -37,26 +37,31 @@
 
     var SmtpServerHub = (function () {
         function SmtpServerHub() {
-            this._callbacks = [];
+            this._callbacks = { onReceive: [], onRemove: [] };
         }
-        SmtpServerHub.prototype._apply = function (arg) {
-            Enumerable.from(this._callbacks).forEach(function (fn) {
+        SmtpServerHub.prototype._apply = function (callbacks, arg) {
+            Enumerable.from(callbacks).forEach(function (fn) {
                 return fn(arg);
             });
         };
         SmtpServerHub.prototype.onReceiveMessage = function (callback) {
-            this._callbacks.push(callback);
+            this._callbacks.onReceive.push(callback);
+        };
+        SmtpServerHub.prototype.onRemoveMessage = function (callback) {
+            this._callbacks.onRemove.push(callback);
         };
         return SmtpServerHub;
     })();
-    _.SmtpServerHub = SmtpServerHub;
 
     app.factory('smtpServerHub', function () {
         var conn = $.hubConnection();
         var hub = conn.createHubProxy("SmtpServerHub");
         var hubProxy = new SmtpServerHub();
         hub.on("ReceiveMessage", function (message) {
-            return hubProxy._apply(message);
+            return hubProxy._apply(hubProxy._callbacks.onReceive, message);
+        });
+        hub.on("RemoveMessage", function (id) {
+            return hubProxy._apply(hubProxy._callbacks.onRemove, id);
         });
         conn.start();
         return hubProxy;

@@ -7,8 +7,6 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
 using Owin;
-using Toolbelt.Net.Smtp.Code;
-
 namespace Toolbelt.Net.Smtp
 {
     public class Startup
@@ -55,7 +53,8 @@ namespace Toolbelt.Net.Smtp
 #else
         private void ConfigureFileServer(IAppBuilder app)
         {
-            var fileSystem = new EmbededResourceFileSystem2("Toolbelt.Net.Smtp");
+            var fileSystem = new EmbeddedResourceFileSystem2("Toolbelt.Net.Smtp");
+            //var fileSystem = new EmbeddedResourceFileSystem("Toolbelt.Net.Smtp");
             app.UseDefaultFiles(new DefaultFilesOptions
             {
                 DefaultFileNames = new[] { "index.html" }.ToList(),

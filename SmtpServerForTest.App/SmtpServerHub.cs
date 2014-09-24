@@ -14,5 +14,10 @@ namespace Toolbelt.Net.Smtp
         {
             clients.All.ReceiveMessage(message.ToSimpleFormat());
         }
+
+        public static void NotifyRemoveMessage(Guid mailId, IHubConnectionContext clients)
+        {
+            clients.All.RemoveMessage(mailId);
+        }
     }
 }
