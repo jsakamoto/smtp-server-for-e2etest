@@ -58,10 +58,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>432FD782DEF8814B13A713903770A92A79AA8CCF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D87B1A9EC3B98811AFB13F9FF55B1D6B1B87D05F</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>SmtpServerForTest.WinFormApp_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -118,6 +118,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="SmtpServerForTest.WinFormApp_TemporaryKey.pfx" />
+    <None Include="TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
