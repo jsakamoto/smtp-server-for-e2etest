@@ -1,7 +1,6 @@
-*.suo
 *.user
-/packages/
-/TestResults/
+*.suo
 bin/
 obj/
-publish/
+.vs/
+node_modules/

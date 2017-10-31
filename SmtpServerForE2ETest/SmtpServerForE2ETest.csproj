@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <RootNamespace>Toolbelt.Net.Smtp</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="src\app.ts" />
+    <None Remove="src\controllers\accountConfigController.ts" />
+    <None Remove="src\controllers\configController.ts" />
+    <None Remove="src\filters.ts" />
+    <None Remove="src\models\Account.ts" />
+    <None Remove="src\models\AppConfig.ts" />
+    <None Remove="src\models\EndPoint.ts" />
+    <None Remove="src\models\SimplifiedMail.ts" />
+    <None Remove="src\services\mailAPIService.ts" />
+    <None Remove="src\services\mailEventsService.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha2-final" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.4.0" />
+    <PackageReference Include="Toolbelt.Net.Smtp.SmtpServerCore" Version="1.0.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\styles\bootstrap-theme.css.map" />
+    <None Include="wwwroot\styles\bootstrap.css.map" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app.ts" />
+    <TypeScriptCompile Include="src\controllers\accountConfigController.ts" />
+    <TypeScriptCompile Include="src\controllers\configController.ts" />
+    <TypeScriptCompile Include="src\controllers\mailsController.ts" />
+    <TypeScriptCompile Include="src\filters.ts" />
+    <TypeScriptCompile Include="src\models\Account.ts" />
+    <TypeScriptCompile Include="src\models\AppConfig.ts" />
+    <TypeScriptCompile Include="src\models\EndPoint.ts" />
+    <TypeScriptCompile Include="src\models\SimplifiedMail.ts" />
+    <TypeScriptCompile Include="src\services\appConfigAPIService.ts" />
+    <TypeScriptCompile Include="src\services\mailAPIService.ts" />
+    <TypeScriptCompile Include="src\services\mailEventsService.ts" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,56 @@
+﻿<div class="command">
+    <a class="icon-link delete" ng-click="ctrl.remove()" ng-class="{enabled:ctrl.hasSelected}" title="Delete selected mails.">
+        Delete selected mails.
+    </a>
+</div>
+
+<div class="mails-list">
+    <div class="mail" ng-repeat="mail in ctrl.mails" ng-class="{selected:mail.selected}">
+        <div class="selector">
+            <input type="checkbox" ng-model="mail.selected" />
+        </div>
+        <div class="summary" ng-click="ctrl.selectThis(mail)">
+            <!--<div>{{mail.id}}</div>-->
+            <div class="subject">{{mail.subject}}</div>
+            <div class="from address">
+                from: {{mail.from}}
+            </div>
+            <div class="to address">
+                to: {{mail.to|join:', '}}
+            </div>
+            <div class="cc address">
+                cc: {{mail.cc|join:', '}}
+            </div><!--<div>{{mail.date}}</div>-->
+        </div>
+    </div>
+</div>
+
+<div class="mail-view" ng-show="ctrl.hasSelected">
+
+    <div class="mail-header">
+        <div class="subject">{{ctrl.selectedMail.subject}}</div>
+        <div class="from address">
+            from: {{ctrl.selectedMail.from}}
+        </div>
+        <div class="to address">
+            to: {{ctrl.selectedMail.to|join:', '}}
+        </div>
+        <div class="cc address">
+            cc: {{ctrl.selectedMail.cc|join:', '}}
+        </div>
+        <div class="timestamp">
+            {{ctrl.selectedMail.date}}
+        </div>
+    </div>
+
+    <div class="mail-attachemnts">
+        <a ng-repeat="attachmentName in ctrl.selectedMail.attachments"
+           ng-href="/api/mails/{{ctrl.selectedMail.id}}/attachments/{{$index}}" target="_blank" class="file">
+            {{attachmentName}}
+        </a>
+    </div>
+
+    <div class="mail-body">
+        <div ng-bind-html="ctrl.selectedMail.body|htmlPreFormat"></div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>SMTP Server for E2E Test</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="favicon.png" rel="icon" type="image/png" />
+    <link href="styles/bootstrap.css" rel="stylesheet" />
+    <link href="styles/site.css" rel="stylesheet" />
+</head>
+<body ng-app="app">
+    <header>
+        <h1>SMTP Server for E2E Test</h1>
+        <div class="actions">
+            <a href="#/config" xng-show="controller != 'ConfigController'" id="link-config" class="icon-link" title="Configuration">
+                config
+            </a>
+        </div>
+    </header>
+
+    <div ng-view class="content-view">
+        <!-- render view here -->
+    </div>
+
+    <footer>
+        <div class="acknowledgment">
+            <span class="banner aspnet">ASP.NET Core</span> |
+            SignalR |
+            <span class="banner bootstrapcss">Bootstrap CSS</span> |
+            <span class="banner angularjs">AngularJS</span> |
+            linq.js |
+            TypeScript
+        </div>
+    </footer>
+
+
+    <script src="scripts/vender/jquery-1.11.0.js"></script>
+    <script src="scripts/vender/bootstrap.min.js"></script>
+    <script src="scripts/vender/angular.js"></script>
+    <script src="scripts/vender/angular-route.js"></script>
+    <script src="scripts/vender/angular-resource.js"></script>
+    <script src="scripts/vender/angular-animate.js"></script>
+    <script src="scripts/vender/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="scripts/vender/signalr-client-1.0.0-alpha2-final.min.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/filters.js"></script>
+    <script src="scripts/services/mailAPIService.js"></script>
+    <script src="scripts/services/appConfigAPIService.js"></script>
+    <script src="scripts/services/mailEventsService.js"></script>
+    <script src="scripts/controllers/mailsController.js"></script>
+    <script src="scripts/controllers/configController.js"></script>
+    <script src="scripts/controllers/accountConfigController.js"></script>
+
+</body>
+</html>
