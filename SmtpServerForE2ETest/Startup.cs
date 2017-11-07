@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.AspNetCore.Sockets;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Toolbelt.Net.Smtp
 {
@@ -35,20 +27,32 @@ namespace Toolbelt.Net.Smtp
             services.AddMvc();
             services.AddSignalR();
 
-            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            var baseDir = GetBaseDir();
             var smtpService = new SmtpService(
                 mailFolderPath: Path.Combine(baseDir, "mails")
             );
             services.AddSingleton(smtpService);
 
             var appConfigService = new AppConfigService(
-                configFolderPath: Path.Combine(baseDir, "config"),
+                configFolderPath: baseDir,
                 config: Configuration
             );
             services.AddSingleton(appConfigService);
+        }
 
-            // https://stackoverflow.com/questions/27299289/how-to-get-signalr-hub-context-in-a-asp-net-core
-            // https://stackoverflow.com/questions/37318209/asp-net-core-rc2-signalr-hub-context-outside-request-thread
+        private string GetBaseDir()
+        {
+            var defaultBaseDir = default(string);
+            if (Environment.OSVersion.Platform.ToString().ToLower().StartsWith("win"))
+            {
+                defaultBaseDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Toolbelt.Net.Smtp.SmtpServerForTest");
+            }
+            else
+            {
+                defaultBaseDir = Path.Combine(Path.DirectorySeparatorChar.ToString(), "var", "smtpe2etest");
+            }
+            var baseDir = Configuration.GetValue("BASEDIR", defaultBaseDir);
+            return baseDir;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
