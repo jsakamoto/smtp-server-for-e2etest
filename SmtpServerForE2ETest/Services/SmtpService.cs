@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using Toolbelt.Net.Smtp.Services;
 
 namespace Toolbelt.Net.Smtp
@@ -55,7 +54,7 @@ namespace Toolbelt.Net.Smtp
 
         private void WaiteForEndOfAllSessions()
         {
-            // TODO: throw new NotImplementedException();
+            this.SmtpServer.WaiteForEndOfAllSessions();
         }
 
         public IEnumerable<SmtpMessage> GetAllMessages()
