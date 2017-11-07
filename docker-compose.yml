@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  e2etestsmtpserver:
-    image: e2etestsmtpserver
+  smtpserver-for-e2etest:
+    image: smtpserver-for-e2etest
     build:
       context: ./SmtpServerForE2ETest
       dockerfile: Dockerfile

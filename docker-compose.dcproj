@@ -6,7 +6,7 @@
     <ProjectGuid>c3da164a-ad85-4d6c-bbf3-efdd7260d3f8</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
     <DockerServiceUrl>http://localhost:8025/</DockerServiceUrl>
-    <DockerServiceName>e2etestsmtpserver</DockerServiceName>
+    <DockerServiceName>smtpserver-for-e2etest</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.ci.build.yml" />
