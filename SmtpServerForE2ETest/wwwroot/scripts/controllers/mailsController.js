@@ -36,6 +36,8 @@ var SmtpServerForE2ETest;
         };
         MailsController.prototype.onMessageReceived = function (message) {
             this.mails.unshift(this.mailAPI.attach(message));
+            if (this.mails.length == 1)
+                this.mails[0].selected = true;
             // TODO: Desktop notification
             //if (userSettings.enableDesktopNotification) {
             //    var notify = new Notification('You got a mail.', { body: mail.Subject, icon: '/favicon.png', tag: 'SmtpServerForTest' });

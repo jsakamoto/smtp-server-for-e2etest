@@ -37,6 +37,7 @@
 
         private onMessageReceived(message: SimplifiedMail): void {
             this.mails.unshift(this.mailAPI.attach(message));
+            if (this.mails.length == 1) this.mails[0].selected = true;
 
             // TODO: Desktop notification
             //if (userSettings.enableDesktopNotification) {
