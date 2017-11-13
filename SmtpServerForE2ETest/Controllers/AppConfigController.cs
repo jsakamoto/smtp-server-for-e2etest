@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Toolbelt.Net.Smtp
 {
+    /// <summary>
+    /// Holo
+    /// </summary>
     [Route("api/config")]
     public class AppConfigController : Controller
     {
@@ -15,12 +18,18 @@ namespace Toolbelt.Net.Smtp
             this.AppConfigService = appConfigService;
         }
 
+        /// <summary>
+        /// Get the application configuration.
+        /// </summary>
         [HttpGet]
         public AppConfig Get()
         {
             return this.AppConfigService.AppConfig;
         }
 
+        /// <summary>
+        /// Set the application configuration. (you can send JSON with only needed properties to you want to change.)
+        /// </summary>
         [HttpPost, HttpPut, HttpPatch]
         public async Task<IActionResult> Put()
         {

@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Toolbelt.Net.Smtp
 {
@@ -26,6 +28,13 @@ namespace Toolbelt.Net.Smtp
             services.AddSingleton(this.Configuration);
             services.AddMvc();
             services.AddSignalR();
+
+            services.AddSwaggerGen(option =>
+            {
+                var xdocPath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "SmtpServerForE2ETest.xml");
+                option.IncludeXmlComments(xdocPath);
+                option.SwaggerDoc("v1", new Info { Title = "SMTP Server for E2E Test Web API", Version = "v1" });
+            });
 
             var baseDir = GetBaseDir();
             var smtpService = new SmtpService(
@@ -68,6 +77,11 @@ namespace Toolbelt.Net.Smtp
                 routes.MapHub<SmtpServerHub>("events");
             });
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(option =>
+            {
+                option.SwaggerEndpoint("/swagger/v1/swagger.json", "This API allows you to manipulate stocked e-mail messages, and configure this Fake SMTP service.");
+            });
             app.UseDefaultFiles();
             app.UseStaticFiles();
 

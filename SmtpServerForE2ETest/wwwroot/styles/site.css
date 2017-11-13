@@ -63,17 +63,28 @@ header {
     line-height: 32px;
 }
 
-#link-config {
-    height: 3em;
-    background-image: url(images/settings-cw.png);
-    line-height: 3em;
-}
-
 #link-goback {
     float: left;
     margin-right: 2em;
     background-image: url(images/back-cb.png);
 }
+
+.navbar .navbar-link {
+    color: #ccc;
+    margin-left: 1.3rem;
+    font-size: 95%;
+    -moz-transition: color linear 0.2s;
+    -o-transition: color linear 0.2s;
+    -webkit-transition: color linear 0.2s;
+    transition: color linear 0.2s;
+}
+
+    .navbar .navbar-link:hover,
+    .navbar .navbar-link:focus,
+    .navbar .navbar-link:active {
+        color: #fff;
+        text-decoration: none;
+    }
 
 footer {
     position: fixed;
@@ -316,5 +327,5 @@ footer {
 
 
 label.disabled {
-    color:#888;
+    color: #888;
 }

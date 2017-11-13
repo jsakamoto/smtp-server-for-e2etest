@@ -13,9 +13,12 @@
 <body ng-app="app">
     <header>
         <h1>SMTP Server for E2E Test</h1>
-        <div class="actions">
-            <a href="#/config" xng-show="controller != 'ConfigController'" id="link-config" class="icon-link" title="Configuration">
-                config
+        <div class="actions navbar">
+            <a href="#/config" ng-show="controller != 'configController'" class="navbar-link" title="Settings">
+                Settings
+            </a>
+            <a href="/swagger" class="navbar-link" title="API Document" target="apidoc">
+                API Document
             </a>
         </div>
     </header>

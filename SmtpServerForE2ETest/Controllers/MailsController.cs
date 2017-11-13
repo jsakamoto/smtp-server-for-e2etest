@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Toolbelt.Net.Smtp
 {
+    /// <summary>
+    /// blur blur
+    /// </summary>
     [Route("api/mails")]
     public class MailsController : Controller
     {
@@ -15,12 +18,18 @@ namespace Toolbelt.Net.Smtp
             this.SmtpService = smtpService;
         }
 
+        /// <summary>
+        /// Retrieve all stocked mail messages.
+        /// </summary>
         [HttpGet]
         public IEnumerable<SmtpMessage> Get()
         {
             return this.SmtpService.GetAllMessages();
         }
 
+        /// <summary>
+        /// Get the stocked mail message of specified id.
+        /// </summary>
         [HttpGet, Route("{id}")]
         public IActionResult Get(Guid id)
         {
@@ -29,24 +38,36 @@ namespace Toolbelt.Net.Smtp
             else return this.NotFound();
         }
 
+        /// <summary>
+        /// Delete all of the stocked mail messages.
+        /// </summary>
         [HttpDelete]
         public void Delete()
         {
             this.SmtpService.DeleteAllMessages();
         }
 
+        /// <summary>
+        /// Delete the stocked mail message of specified id.
+        /// </summary>
         [HttpDelete, Route("simple/{id}"), Route("{id}")]
         public void Delete(Guid id)
         {
             this.SmtpService.DeleteMessage(id);
         }
 
+        /// <summary>
+        /// Get all stocked mail message with simplified format.
+        /// </summary>
         [HttpGet, Route("simple")]
         public IEnumerable<object> GetSimpleFormat()
         {
             return this.Get().Select(a => a.ToSimpleFormat());
         }
 
+        /// <summary>
+        /// Get the stocked mail message of specified id with simplified format.
+        /// </summary>
         [HttpGet, Route("simple/{id}")]
         public IActionResult GetSimpleFormat(Guid id)
         {
@@ -55,6 +76,9 @@ namespace Toolbelt.Net.Smtp
             return this.NotFound();
         }
 
+        /// <summary>
+        /// Get the attached file in the stocked mail message of specified mail and attachment id.
+        /// </summary>
         [HttpGet, Route("{id}/attachments/{attachmentIndex}")]
         public IActionResult GetAttachment(Guid id, int attachmentIndex)
         {
