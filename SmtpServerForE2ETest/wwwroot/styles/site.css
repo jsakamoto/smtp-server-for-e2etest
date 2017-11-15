@@ -100,6 +100,10 @@ footer {
         font-size: 75%;
     }
 
+        footer .acknowledgment a {
+            color: #888;
+        }
+
         footer .acknowledgment .banner {
             background-position: left center;
             background-repeat: no-repeat;
@@ -113,19 +117,28 @@ footer {
             background-image: url(images/angularjs-g-16.png);
         }
 
-        footer .acknowledgment .mono {
-            background-image: url(images/mono-g-16.png);
-        }
-
         footer .acknowledgment .bootstrapcss {
             background-image: url(images/bootstrapcss-g-16.png);
         }
 
         footer .acknowledgment .aspnet {
-            padding-left: 28px;
+            /* Special thanks to https://github.com/campusMVP/dotnetCoreLogoPack / CC BY-SA 4.0 */
             background-image: url(images/aspnet-16.png);
+            padding-left: 0px;
+            width: 78px;
         }
 
+            footer .acknowledgment .aspnet a {
+                color: transparent;
+            }
+
+        footer .acknowledgment .typescript {
+            background-image: url(images/typescript-g-16.png);
+        }
+
+        footer .acknowledgment .github {
+            background-image: url(images/github-g-16.png);
+        }
 
 .command, .mails-list {
     left: 0;

@@ -23,7 +23,7 @@
         "ASPNETCORE_SMTPENDPOINTS": "localhost:25",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:51087/"
+      "applicationUrl": "http://localhost:8025/"
     }
   }
 }
