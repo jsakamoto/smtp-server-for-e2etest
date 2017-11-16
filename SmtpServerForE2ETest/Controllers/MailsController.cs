@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Toolbelt.Net.Smtp
@@ -8,7 +9,7 @@ namespace Toolbelt.Net.Smtp
     /// <summary>
     /// blur blur
     /// </summary>
-    [Route("api/mails")]
+    [Route("api/mails"), EnableCors(CorsPolicy.Any)]
     public class MailsController : Controller
     {
         private SmtpService SmtpService { get; }

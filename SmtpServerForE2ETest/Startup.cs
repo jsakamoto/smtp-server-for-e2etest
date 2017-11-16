@@ -11,6 +11,11 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace Toolbelt.Net.Smtp
 {
+    public static class CorsPolicy
+    {
+        public const string Any = "Any";
+    }
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -26,6 +31,12 @@ namespace Toolbelt.Net.Smtp
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             services.AddSingleton(this.Configuration);
+
+            services.AddCors(option => option.AddPolicy(CorsPolicy.Any, policy => policy
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            ));
             services.AddMvc();
             services.AddSignalR();
 
