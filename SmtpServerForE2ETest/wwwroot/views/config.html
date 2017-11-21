@@ -126,18 +126,18 @@
         <!-- Modal for add end point ->
     </div>
     -->
-    <!--
+
     <div class="well col-md-5">
         <h3>User Interface</h3>
         <div>
-            <label ng-class="{disabled:desktopNotificationPermission == 'denied' || desktopNotificationPermission == 'notsupported'}">
+            <label ng-class="{disabled: ctrl.desktopNotificationPermission == 'denied' || ctrl.desktopNotificationPermission == 'notsupported'}">
                 <input type="checkbox"
-                       ng-model="userSettings.enableDesktopNotification" ng-disabled="desktopNotificationPermission == 'denied' || desktopNotificationPermission == 'notsupported'" />
+                       ng-model="ctrl.userSettings.enableDesktopNotification" ng-disabled="ctrl.desktopNotificationPermission == 'denied' || ctrl.desktopNotificationPermission == 'notsupported'" />
                 Enable Desktop Notification
             </label>
-            <div ng-show="desktopNotificationPermission == 'denied'" class="label label-warning">Desktop notification not allowed at this browser.</div>
-            <div ng-show="desktopNotificationPermission == 'notsupported'" class="label label-warning">Desktop notification not supported at this browser.</div>
+            <div ng-show="ctrl.desktopNotificationPermission == 'denied'" class="label label-warning">Desktop notification not allowed at this browser.</div>
+            <div ng-show="ctrl.desktopNotificationPermission == 'notsupported'" class="label label-warning">Desktop notification not supported at this browser.</div>
         </div>
     </div>
-    -->
+
 </div>

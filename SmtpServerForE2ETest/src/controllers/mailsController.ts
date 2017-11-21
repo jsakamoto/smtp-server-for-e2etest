@@ -13,6 +13,7 @@
 
         constructor(
             $rootScope: ng.IRootScopeService,
+            private userSettings: UserSettingsService,
             private mailAPI: MailAPIService,
             private mailEvents: MailEventsService
         ) {
@@ -39,11 +40,11 @@
             this.mails.unshift(this.mailAPI.attach(message));
             if (this.mails.length == 1) this.mails[0].selected = true;
 
-            // TODO: Desktop notification
-            //if (userSettings.enableDesktopNotification) {
-            //    var notify = new Notification('You got a mail.', { body: mail.Subject, icon: '/favicon.png', tag: 'SmtpServerForTest' });
-            //    setTimeout(() => notify.close(), 5000);
-            //}
+            // Desktop notification
+            if (this.userSettings.settings.enableDesktopNotification) {
+                var notify = new Notification('You got a mail.', { body: message.subject, icon: '/favicon.png', tag: 'SmtpServerForTest' });
+                setTimeout(() => notify.close(), 5000);
+            }
         }
 
         private onMessageDeleted(id: string): void {

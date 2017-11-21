@@ -2,8 +2,9 @@
 var SmtpServerForE2ETest;
 (function (SmtpServerForE2ETest) {
     var MailsController = (function () {
-        function MailsController($rootScope, mailAPI, mailEvents) {
+        function MailsController($rootScope, userSettings, mailAPI, mailEvents) {
             var _this = this;
+            this.userSettings = userSettings;
             this.mailAPI = mailAPI;
             this.mailEvents = mailEvents;
             this.mails = mailAPI.query();
@@ -38,11 +39,11 @@ var SmtpServerForE2ETest;
             this.mails.unshift(this.mailAPI.attach(message));
             if (this.mails.length == 1)
                 this.mails[0].selected = true;
-            // TODO: Desktop notification
-            //if (userSettings.enableDesktopNotification) {
-            //    var notify = new Notification('You got a mail.', { body: mail.Subject, icon: '/favicon.png', tag: 'SmtpServerForTest' });
-            //    setTimeout(() => notify.close(), 5000);
-            //}
+            // Desktop notification
+            if (this.userSettings.settings.enableDesktopNotification) {
+                var notify = new Notification('You got a mail.', { body: message.subject, icon: '/favicon.png', tag: 'SmtpServerForTest' });
+                setTimeout(function () { return notify.close(); }, 5000);
+            }
         };
         MailsController.prototype.onMessageDeleted = function (id) {
             var index = this.mails.findIndex(function (m) { return m.id == id; });

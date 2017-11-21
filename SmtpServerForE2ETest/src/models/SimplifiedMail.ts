@@ -4,6 +4,8 @@
 
         id: string;
 
+        subject: string;
+
         selected: boolean;
     }
 }
