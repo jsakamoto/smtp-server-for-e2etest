@@ -1,3 +1,4 @@
+"use strict";
 var _;
 (function (_) {
     var app = angular.module('SmtpServerForTest.UI.App');

@@ -3,9 +3,9 @@ module _ {
 
     var app = angular.module('SmtpServerForTest.UI.App', ['ngRoute', 'ngResource', 'ngAnimate', 'ui.bootstrap']);
 
-    app.run($rootScope => {
+    app.run(($rootScope: ng.IRootScopeService) => {
         $rootScope.$on('$routeChangeSuccess', (ev, data) => {
-            $rootScope.controller = (data.$$route || { controller: '' }).controller;
+            ($rootScope as any).controller = (data.$$route || { controller: '' }).controller;
         })
     });
 
@@ -13,19 +13,19 @@ module _ {
         $routeProvider
             .when('/', { controller: 'MailsController', templateUrl: '/views/mails.html' })
             .when('/config', { controller: 'ConfigController', templateUrl: '/views/config.html' });
-        if (!$httpProvider.defaults.headers.get) $httpProvider.defaults.headers.get = {};
-        $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
+        if (!$httpProvider.defaults.headers && !$httpProvider.defaults.headers!.get) $httpProvider.defaults.headers!.get = {};
+        $httpProvider.defaults.headers!.get['If-Modified-Since'] = '0';
     });
 
     app.factory('mailAPI', ($resource: ng.resource.IResourceService, $q: ng.IQService) => {
         var res = $resource('/api/mails/simple/:id', { id: '@Id' });
         return {
             query: () => {
-                var defer = $q.defer();
-                res.query(mails => defer.resolve(mails));
+                var defer = $q.defer<any>();
+                res.query((mails: any) => defer.resolve(mails));
                 return defer.promise;
             },
-            remove: (param) => {
+            remove: (param: any) => {
                 var defer = $q.defer();
                 res.remove(param, () => defer.resolve());
                 return defer.promise;
@@ -39,8 +39,8 @@ module _ {
     }
 
     class SmtpServerHub {
-        _callbacks = { onReceive: [], onRemove: [] };
-        _apply(callbacks: Function[], arg: any): void { Enumerable.from(callbacks).forEach(fn => fn(arg)); }
+        _callbacks = { onReceive: [] as Function[], onRemove: [] as Function[] };
+        _apply(callbacks: Function[], arg: any): void { callbacks.forEach(fn => fn(arg)); }
         onReceiveMessage(callback: Function): void { this._callbacks.onReceive.push(callback); }
         onRemoveMessage(callback: Function): void { this._callbacks.onRemove.push(callback); }
     }
@@ -61,7 +61,7 @@ module _ {
         var getterFunc = res.get;
         res.get = () => {
             var defer = $q.defer();
-            getterFunc.apply(res, [config => { defer.resolve(config); }]);
+            getterFunc.apply(res, [(config: any) => { defer.resolve(config); }]);
             return defer.promise;
         };
         return res;

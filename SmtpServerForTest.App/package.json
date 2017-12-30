@@ -1,0 +1,14 @@
+{
+  "name": "smtp-server-for-test.app",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "@types/angular": "1.6.32",
+    "@types/angular-cookies": "1.4.5",
+    "@types/angular-resource": "1.5.14",
+    "@types/angular-route": "1.3.4",
+    "@types/jquery": "3.2.12",
+    "@types/signalr": "2.2.35",
+    "typescript": "2.5.3"
+  }
+}

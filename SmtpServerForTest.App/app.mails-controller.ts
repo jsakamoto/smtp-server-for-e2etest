@@ -13,9 +13,9 @@
 
         var userSettings: { enableDesktopNotification: boolean } = JSON.parse(window.localStorage.getItem('userSettings') || '{"enableDesktopNotification":false}');
 
-        mailAPI.query().then(mails => $scope.mails = mails);
+        mailAPI.query().then((mails: any) => $scope.mails = mails);
 
-        smtpServerHub.onReceiveMessage(mail => {
+        smtpServerHub.onReceiveMessage((mail: any) => {
             $scope.$apply(() => {
                 $scope.mails.unshift(mail);
                 if (userSettings.enableDesktopNotification) {
@@ -25,8 +25,8 @@
             });
         });
 
-        smtpServerHub.onRemoveMessage(mailId => {
-            var mailToDelete = Enumerable.from($scope.mails).firstOrDefault(m => m.Id == mailId);
+        smtpServerHub.onRemoveMessage((mailId: string) => {
+            var mailToDelete = $scope.mails.filter(m => m.Id == mailId).pop();
             if (mailToDelete != null) {
                 var index = $scope.mails.indexOf(mailToDelete);
                 $scope.$apply(() => $scope.mails.splice(index, 1));
@@ -34,36 +34,33 @@
         });
 
         var getSelectedMails = () => {
-            return Enumerable.from($scope.mails)
-                .where(m => m.selected);
+            return $scope.mails.filter(m => m.selected);
         };
 
         var setCurrentMail = () => {
             var selectedMails = getSelectedMails();
-            if (selectedMails.count() == 1)
-                $scope.current = selectedMails.first();
+            if (selectedMails.length == 1)
+                $scope.current = selectedMails[0];
             else
                 $scope.current = null;
         };
 
         $scope.$watch(() => {
             return getSelectedMails()
-                .select(m => m.Id)
-                .toArray()
+                .map(m => m.Id)
                 .join();
         }, setCurrentMail);
 
-        $scope.hasSelected = () => getSelectedMails().count() > 0;
+        $scope.hasSelected = () => getSelectedMails().length > 0;
 
         $scope.selectThis = (index) => {
-            Enumerable.from($scope.mails).forEach(m => { m.selected = false; });
+            $scope.mails.forEach(m => { m.selected = false; });
             $scope.mails[index].selected = true;
         };
 
         $scope.remove = () => {
-            var selectedMails = getSelectedMails().toArray();
-            Enumerable.from(selectedMails)
-                .forEach(m => { mailAPI.remove({ id: m.Id }); });
+            var selectedMails = getSelectedMails();
+            selectedMails.forEach(m => { mailAPI.remove({ id: m.Id }); });
         };
     });
 }
