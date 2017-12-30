@@ -141,18 +141,18 @@
     <EmbeddedResource Include="fonts\glyphicons-halflings-regular.eot" />
     <EmbeddedResource Include="fonts\glyphicons-halflings-regular.ttf" />
     <EmbeddedResource Include="fonts\glyphicons-halflings-regular.woff" />
-    <None Include="app.config-controller.js.map">
+    <EmbeddedResource Include="app.config-controller.js.map">
       <DependentUpon>app.config-controller.ts</DependentUpon>
-    </None>
-    <None Include="app.filters.js.map">
+    </EmbeddedResource>
+    <EmbeddedResource Include="app.filters.js.map">
       <DependentUpon>app.filters.ts</DependentUpon>
-    </None>
-    <None Include="app.js.map">
+    </EmbeddedResource>
+    <EmbeddedResource Include="app.js.map">
       <DependentUpon>app.ts</DependentUpon>
-    </None>
-    <None Include="app.mails-controller.js.map">
+    </EmbeddedResource>
+    <EmbeddedResource Include="app.mails-controller.js.map">
       <DependentUpon>app.mails-controller.ts</DependentUpon>
-    </None>
+    </EmbeddedResource>
     <None Include="package-lock.json">
       <DependentUpon>package.json</DependentUpon>
     </None>

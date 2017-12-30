@@ -13,6 +13,7 @@
 
         var userSettings: { enableDesktopNotification: boolean } = JSON.parse(window.localStorage.getItem('userSettings') || '{"enableDesktopNotification":false}');
 
+        $scope.mails = [];
         mailAPI.query().then((mails: any) => $scope.mails = mails);
 
         smtpServerHub.onReceiveMessage((mail: any) => {

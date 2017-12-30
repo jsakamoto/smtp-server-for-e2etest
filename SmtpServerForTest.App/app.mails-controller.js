@@ -4,6 +4,7 @@ var _;
     var app = angular.module('SmtpServerForTest.UI.App');
     app.controller('MailsController', function ($scope, $rootScope, mailAPI, smtpServerHub) {
         var userSettings = JSON.parse(window.localStorage.getItem('userSettings') || '{"enableDesktopNotification":false}');
+        $scope.mails = [];
         mailAPI.query().then(function (mails) { return $scope.mails = mails; });
         smtpServerHub.onReceiveMessage(function (mail) {
             $scope.$apply(function () {

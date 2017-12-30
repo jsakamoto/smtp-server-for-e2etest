@@ -11,7 +11,7 @@ var _;
         $routeProvider
             .when('/', { controller: 'MailsController', templateUrl: '/views/mails.html' })
             .when('/config', { controller: 'ConfigController', templateUrl: '/views/config.html' });
-        if (!$httpProvider.defaults.headers && !$httpProvider.defaults.headers.get)
+        if (!$httpProvider.defaults.headers.get)
             $httpProvider.defaults.headers.get = {};
         $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
     });
