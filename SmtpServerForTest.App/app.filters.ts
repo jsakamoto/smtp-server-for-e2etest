@@ -8,8 +8,8 @@
         };
     })
 
-    app.filter('htmlPreFormat', ($injector) => {
-        var sce = null;
+    app.filter('htmlPreFormat', ($injector: any) => {
+        var sce: any = null;
         return (input: string) => {
             if (input == null) return null;
             sce = sce || $injector.get('$sce');

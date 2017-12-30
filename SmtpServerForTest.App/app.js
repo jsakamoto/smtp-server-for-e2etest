@@ -1,3 +1,4 @@
+"use strict";
 var _;
 (function (_) {
     var app = angular.module('SmtpServerForTest.UI.App', ['ngRoute', 'ngResource', 'ngAnimate', 'ui.bootstrap']);
@@ -10,7 +11,7 @@ var _;
         $routeProvider
             .when('/', { controller: 'MailsController', templateUrl: '/views/mails.html' })
             .when('/config', { controller: 'ConfigController', templateUrl: '/views/config.html' });
-        if (!$httpProvider.defaults.headers.get)
+        if (!$httpProvider.defaults.headers && !$httpProvider.defaults.headers.get)
             $httpProvider.defaults.headers.get = {};
         $httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
     });
@@ -29,11 +30,11 @@ var _;
             }
         };
     });
-    var SmtpServerHub = (function () {
+    var SmtpServerHub = /** @class */ (function () {
         function SmtpServerHub() {
             this._callbacks = { onReceive: [], onRemove: [] };
         }
-        SmtpServerHub.prototype._apply = function (callbacks, arg) { Enumerable.from(callbacks).forEach(function (fn) { return fn(arg); }); };
+        SmtpServerHub.prototype._apply = function (callbacks, arg) { callbacks.forEach(function (fn) { return fn(arg); }); };
         SmtpServerHub.prototype.onReceiveMessage = function (callback) { this._callbacks.onReceive.push(callback); };
         SmtpServerHub.prototype.onRemoveMessage = function (callback) { this._callbacks.onRemove.push(callback); };
         return SmtpServerHub;

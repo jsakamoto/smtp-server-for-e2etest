@@ -1,3 +1,4 @@
+"use strict";
 var _;
 (function (_) {
     var app = angular.module('SmtpServerForTest.UI.App');
@@ -14,38 +15,35 @@ var _;
             });
         });
         smtpServerHub.onRemoveMessage(function (mailId) {
-            var mailToDelete = Enumerable.from($scope.mails).firstOrDefault(function (m) { return m.Id == mailId; });
+            var mailToDelete = $scope.mails.filter(function (m) { return m.Id == mailId; }).pop();
             if (mailToDelete != null) {
                 var index = $scope.mails.indexOf(mailToDelete);
                 $scope.$apply(function () { return $scope.mails.splice(index, 1); });
             }
         });
         var getSelectedMails = function () {
-            return Enumerable.from($scope.mails)
-                .where(function (m) { return m.selected; });
+            return $scope.mails.filter(function (m) { return m.selected; });
         };
         var setCurrentMail = function () {
             var selectedMails = getSelectedMails();
-            if (selectedMails.count() == 1)
-                $scope.current = selectedMails.first();
+            if (selectedMails.length == 1)
+                $scope.current = selectedMails[0];
             else
                 $scope.current = null;
         };
         $scope.$watch(function () {
             return getSelectedMails()
-                .select(function (m) { return m.Id; })
-                .toArray()
+                .map(function (m) { return m.Id; })
                 .join();
         }, setCurrentMail);
-        $scope.hasSelected = function () { return getSelectedMails().count() > 0; };
+        $scope.hasSelected = function () { return getSelectedMails().length > 0; };
         $scope.selectThis = function (index) {
-            Enumerable.from($scope.mails).forEach(function (m) { m.selected = false; });
+            $scope.mails.forEach(function (m) { m.selected = false; });
             $scope.mails[index].selected = true;
         };
         $scope.remove = function () {
-            var selectedMails = getSelectedMails().toArray();
-            Enumerable.from(selectedMails)
-                .forEach(function (m) { mailAPI.remove({ id: m.Id }); });
+            var selectedMails = getSelectedMails();
+            selectedMails.forEach(function (m) { mailAPI.remove({ id: m.Id }); });
         };
     });
 })(_ || (_ = {}));

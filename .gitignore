@@ -1,7 +1,9 @@
 *.suo
 *.user
+.vs/
 /packages/
 /TestResults/
 bin/
 obj/
 publish/
+node_modules/

@@ -1,3 +1,4 @@
+"use strict";
 var _;
 (function (_) {
     var app = angular.module('SmtpServerForTest.UI.App');
@@ -59,8 +60,8 @@ var _;
             var scope = $scope.$new();
             scope.target = endPoint;
             scope.ok = function () {
-                var isConflicted = Enumerable.from(otherEndPoints)
-                    .any(function (ep) { return scope.target.Address == ep.Address && scope.target.Port == ep.Port; });
+                var isConflicted = otherEndPoints
+                    .some(function (ep) { return scope.target.Address == ep.Address && scope.target.Port == ep.Port; });
                 if (isConflicted == false) {
                     modalDialog.close();
                     defer.resolve(scope.target);

@@ -1,9 +1,4 @@
-﻿declare class Notification {
-    constructor(title: string, options: any);
-    close(): void;
-}
-
-interface Window {
+﻿interface Window {
     Notification: {
         permission: string;
         requestPermission(callback: Function): void;
@@ -40,7 +35,7 @@ module _ {
 
     app.controller('ConfigController', ($scope: IConfigScope, $modal, $q: ng.IQService, configAPI) => {
 
-        configAPI.get().then(config => {
+        configAPI.get().then((config: any) => {
             // Setup server configuration save/watch.
             $scope.config = config;
             $scope.saveConfig = () => {
@@ -76,7 +71,7 @@ module _ {
 
     app.controller('AccountConfigController', ($scope: IConfigEditorScope, $modal, $q: ng.IQService, configAPI) => {
 
-        var doAccountDialog = account => {
+        var doAccountDialog = (account: any) => {
             var defer = $q.defer();
             var scope = $scope.$new();
             scope.target = account;
@@ -106,13 +101,13 @@ module _ {
 
     app.controller('SmtpEndPointConfigController', function ($scope: IConfigEditorScope, $modal, $q: ng.IQService, configAPI) {
 
-        var doEndPointDialog = (endPoint, otherEndPoints: EndPoint[]) => {
+        var doEndPointDialog = (endPoint: any, otherEndPoints: EndPoint[]) => {
             var defer = $q.defer();
             var scope = $scope.$new();
             scope.target = endPoint;
             scope.ok = function () {
-                var isConflicted = Enumerable.from(otherEndPoints)
-                    .any(ep => scope.target.Address == ep.Address && scope.target.Port == ep.Port);
+                var isConflicted = otherEndPoints
+                    .some(ep => scope.target.Address == ep.Address && scope.target.Port == ep.Port);
                 if (isConflicted == false) {
                     modalDialog.close();
                     defer.resolve(scope.target);

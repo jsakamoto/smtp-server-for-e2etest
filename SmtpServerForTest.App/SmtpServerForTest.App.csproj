@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -124,11 +124,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="app.config-controller.js">
+      <DependentUpon>app.config-controller.ts</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="app.filters.js">
+      <DependentUpon>app.filters.ts</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="app.js">
+      <DependentUpon>app.ts</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="app.mails-controller.js">
+      <DependentUpon>app.mails-controller.ts</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Content\bootstrap-theme.css.map" />
     <EmbeddedResource Include="Content\bootstrap.css.map" />
     <EmbeddedResource Include="fonts\glyphicons-halflings-regular.eot" />
     <EmbeddedResource Include="fonts\glyphicons-halflings-regular.ttf" />
     <EmbeddedResource Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="app.config-controller.js.map">
+      <DependentUpon>app.config-controller.ts</DependentUpon>
+    </None>
+    <None Include="app.filters.js.map">
+      <DependentUpon>app.filters.ts</DependentUpon>
+    </None>
+    <None Include="app.js.map">
+      <DependentUpon>app.ts</DependentUpon>
+    </None>
+    <None Include="app.mails-controller.js.map">
+      <DependentUpon>app.mails-controller.ts</DependentUpon>
+    </None>
+    <None Include="package-lock.json">
+      <DependentUpon>package.json</DependentUpon>
+    </None>
+    <None Include="package.json" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Scripts\angular-animate.min.js.map" />
     <EmbeddedResource Include="Scripts\angular-cookies.min.js.map" />
@@ -141,6 +169,7 @@
     <EmbeddedResource Include="Scripts\errors.json" />
     <EmbeddedResource Include="Scripts\version.json" />
     <EmbeddedResource Include="Scripts\jquery-1.11.0.min.map" />
+    <None Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="index.html" />
@@ -444,30 +473,6 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="app.mails-controller.ts" />
     <TypeScriptCompile Include="app.config-controller.ts" />
-    <TypeScriptCompile Include="Scripts\linq.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-route.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-scenario.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="app.filters.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="app.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="app.config-controller.js" />
-    <EmbeddedResource Include="app.mails-controller.js" />
-    <EmbeddedResource Include="Scripts\linq-vsdoc.js" />
-    <EmbeddedResource Include="Scripts\linq.js" />
-    <EmbeddedResource Include="Scripts\linq.min.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="favicon.png" />
