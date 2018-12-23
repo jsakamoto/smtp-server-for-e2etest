@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SMTP Server for Dev/Automated System Test")]
-[assembly: AssemblyCopyright("Copyright © J.Sakamoto 2014-2016")]
+[assembly: AssemblyCopyright("Copyright © J.Sakamoto 2014-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
