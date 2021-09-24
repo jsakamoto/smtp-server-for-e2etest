@@ -57,7 +57,7 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>EEED6B7132F9C483D57ADFADDADA99BA2FB984F0</ManifestCertificateThumbprint>
