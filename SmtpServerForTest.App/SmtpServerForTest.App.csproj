@@ -103,9 +103,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Toolbelt.Net.Smtp.SmtpMessage, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpMessage.1.0.0.7-beta1\lib\net40\Toolbelt.Net.Smtp.SmtpMessage.dll</HintPath>
+    <Reference Include="Toolbelt.Net.Smtp.SmtpMessage, Version=1.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolbelt.Net.Smtp.SmtpMessage.1.0.1\lib\net45\Toolbelt.Net.Smtp.SmtpMessage.dll</HintPath>
     </Reference>
     <Reference Include="Toolbelt.Net.Smtp.SmtpServerCore, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
